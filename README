@@ -1,0 +1,48 @@
+Functions:
+
+trie.c : insert() :
+
+    - inserts a routing table entry into the trie
+    - according to the bits in the prefix
+
+get_best_route() (Longest Prefix Match) :
+
+    - search in trie
+    - find the best matching routing entry from a routing table
+
+get_mac_entry() :
+
+    - search for an entry that matches IP destination 
+
+icmp() :
+
+    - generate ICMP packets with s specific type
+    - construct IP header and Ethernet header
+    - send ICMP packet to specified interface
+
+main(): 
+    
+    - allocate memory for arp_table and rtable
+    - read arp_table and rtable
+    - create  trie and populate with rtable
+
+    - verify checksum of IP header
+    if old and new checksum not matching
+        - the packet is invalid and is discarded
+        - buf zeroed and continue
+
+    if destination IP address == IP address of the interface
+        - generate and send Echo Reply messaje; tpye 0
+    
+    if nexthop router not found or no rute available tot the destination network
+        - generate and send Destination Unreachable messaje; type 3
+     
+    
+    if ttl of the received IP packet expires
+        - generate and send Time Exceded messaje; type 11
+
+    - update ttl and checksum
+    - find destination MAC address
+    - find nexthop
+    - send packet
+    
